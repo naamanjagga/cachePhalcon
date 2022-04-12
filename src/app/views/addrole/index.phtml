@@ -1,0 +1,23 @@
+
+
+<h2>Add Products using this form</h2>
+<?php echo $this->tag->form("addrole/add"); ?>
+
+    <p>
+        <label for="role">Role</label>
+        <?php echo $this->tag->textField("role"); ?>
+    </p>
+    <p>
+        <label for="controller">Controller</label>
+        <?php echo $this->tag->textField("controller"); ?>
+    </p>
+    <p>
+        <label for="action">Action</label>
+        <?php echo $this->tag->textField("action"); ?>
+    </p>
+    <p>
+        <?php echo $this->tag->submitButton("addRole"); ?>
+    </p>
+
+
+</form>

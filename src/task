@@ -1,0 +1,7 @@
+Now use this JWT token in query paramete as "?bearer=<token>" and check if user have access to it
+For checking accessibility we have to do following things
+
+
+Validate if token not expired. If expired then also Access Denied
+
+Use it to check accesibilty using ACL

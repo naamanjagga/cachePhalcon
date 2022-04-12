@@ -1,0 +1,34 @@
+<h2>Place Order using this form</h2>
+<?php echo $this->tag->form("setting/add"); ?>
+
+
+<p>
+    <label for="product">Title Optimization</label>
+
+    <select name="title" onchange="">
+        <option value="<?php echo $title ?>" name='tags'><?php echo $title ?> Tags</option>
+        <option value="with" name='tags'>With Tags</option>
+        <option value="without" name='tags'>Without Tags</option>
+    </select>
+</p>
+
+<p>
+    <label for="price">Default Price</label>
+    <?php echo $this->tag->textField("price"); ?>
+</p>
+
+<p>
+    <label for="stock">Default stock</label>
+    <?php echo $this->tag->textField("stock"); ?>
+</p>
+
+<p>
+    <label for="zipcode">Default zipcode</label>
+    <?php echo $this->tag->textField("zipcode"); ?>
+</p>
+
+<p>
+    <?php echo $this->tag->submitButton("setting"); ?>
+</p>
+
+</form>

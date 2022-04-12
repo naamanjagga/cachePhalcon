@@ -1,0 +1,28 @@
+<?php echo $this->tag->linkTo(['addproduct/index?bearer='.$bearer, 'add products', 'class' => 'btn btn-primary']); ?>
+<?php echo $this->tag->linkTo(['addorder/see?bearer='.$bearer, 'see orders', 'class' => 'btn btn-primary']); ?>
+<?php echo $this->tag->linkTo(['addorder/index?bearer='.$bearer, 'add orders', 'class' => 'btn btn-primary']); ?>
+<?php echo $this->tag->linkTo(['setting/index?bearer='.$bearer, 'settings', 'class' => 'btn btn-primary']); ?>
+<?php echo $this->tag->linkTo(['addrole/index?bearer='.$bearer, 'Add Role', 'class' => 'btn btn-primary']); ?>
+<?php
+
+foreach ($value as $v) {
+  echo '<div class="row" >
+          <div class="col-md-2" >
+            <div class="card" style="width: 18rem;">
+               <img class="card-img-top" src="https://forterra.org/wp-content/uploads/2022/01/Lake-Serene.jpg" alt="Card image cap" width="70%" height="70%">
+              <div class="card-body">
+              <h5 class="card-title">NAME :'.$v->name.'</h5>
+              <p class="card-text">DESCRIPTION :'.$v->description.'</p>
+              <p class="card-text">TAG : '.$v->tags.'</p>
+              <p class="card-text">PRICE :'.$v->price.'</p>
+              <p class="card-text">STOCK :'.$v->stock.'</p>
+              <form action="../addorder/index" method="POST" >
+              <button class="btn bg-dark text-muted" value="'.$v->id.'">ORDER</button>
+              </form>
+            </div>
+          </div>
+        </div>';
+}
+
+?>
+

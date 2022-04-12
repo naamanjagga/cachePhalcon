@@ -1,0 +1,39 @@
+
+
+<h2>Add Products using this form</h2>
+<?php echo $this->tag->form("addproduct/index"); ?>
+
+    <p>
+        <label for="name">Name</label>
+        <?php echo $this->tag->textField("name"); ?>
+    </p>
+
+    <p>
+        <label for="description">Description</label>
+        <textarea name="description" ></textarea>
+    </p>
+
+    <p>
+        <label for="tags">Tag</label>
+        <?php echo $this->tag->textField("tags"); ?>
+    </p>
+
+    <p>
+        <label for="price">Price</label>
+        <?php echo $this->tag->textField("price"); ?>
+        <!-- <input type="text" name="role" disabled value="user" > -->
+    </p>
+
+    <p>
+        <label for="stock">Stock</label>
+        <?php echo $this->tag->textField("stock"); ?>
+        <!-- <input type="text" name="status" disabled value="restricted" > -->
+    </p>
+
+    <p>
+        <?php echo $this->tag->submitButton("addProduct"); ?>
+    </p>
+    <?php echo $message ?>
+
+
+</form>

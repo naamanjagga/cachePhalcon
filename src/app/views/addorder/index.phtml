@@ -1,0 +1,38 @@
+<h2>Place Order using this form</h2>
+<?php echo $this->tag->form("addorder/add"); ?>
+
+<p>
+    <label for="name">Customer Name</label>
+    <?php echo $this->tag->textField("customer_name"); ?>
+</p>
+
+<p>
+    <label for="Address">Customer Address</label>
+    <?php echo $this->tag->textField("address"); ?>
+</p>
+
+<p>
+    <label for="zipcode">Zipcode</label>
+    <?php echo $this->tag->textField("zipcode"); ?>
+</p>
+
+<p>
+    <label for="product">Product</label>
+    <select name="product" id="product">
+    <option value="">SELECT</option>
+        <?php foreach($value as $p) { ?>
+        <option value="<?php echo $p->name; ?>"><?php echo $p->name; ?></option>
+        <?php } ?>
+    </select>
+</p>
+
+<p>
+    <label for="quantity">Quantity</label>
+    <?php echo $this->tag->textField("quantity"); ?>
+</p>
+
+<p>
+    <?php echo $this->tag->submitButton("addOrder"); ?>
+</p>
+
+</form>
