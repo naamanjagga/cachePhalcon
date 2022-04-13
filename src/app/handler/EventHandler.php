@@ -11,6 +11,8 @@ use Phalcon\Events\Event;
 use Phalcon\Security\JWT\Token\Parser;
 use Phalcon\Security\JWT\Validator;
 use Phalcon\Mvc\Dispatcher;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Products;
 use Orders;
 use Settings;
@@ -80,23 +82,23 @@ class EventHandler extends Controller
             $bearer = $application->request->get('bearer');
             if ($bearer) {
                 try {
-                    $parser = new Parser();
-                    $tokenObject = $parser->parse($bearer);
-                    $now        = new \DateTimeImmutable();
-                    $expires    = $now->getTimestamp();
-                    // $expires    = $now->modify('+1 day')->getTimestamp();
+                    // $parser = new Parser();
+                    // $tokenObject = $parser->parse($bearer);
+                    // $now        = new \DateTimeImmutable();
+                    // $expires    = $now->getTimestamp();
+                    // // $expires    = $now->modify('+1 day')->getTimestamp();
 
-                    $validator = new Validator($tokenObject, 100);
-                    $validator->validateExpiration($expires);
-                    // echo 'validate';
-                    // die;
+                    // $validator = new Validator($tokenObject, 100);
+                    // $validator->validateExpiration($expires);
+                    // // echo 'validate';
+                    // // die;
 
-                    $claim = $tokenObject->getClaims()->getPayload();
-                    $user = $claim['sub'];
-                   
-                   
-
-                    
+                    // $claim = $tokenObject->getClaims()->getPayload();
+                    // $user = $claim['sub'];
+                    $key = "example_key";
+                    $decoded = JWT::decode($bearer, new Key($key, 'HS256'));
+                    $name = $decoded->name;
+                    $user = $decoded->role;
                 } catch (\Exception $e) {
                     echo $e->getMessage();
                     die;
@@ -109,7 +111,7 @@ class EventHandler extends Controller
                     die();
                 } else {
                 }
-            } 
+            }
         } else {
             echo 'file not found';
             die;

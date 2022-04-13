@@ -24,7 +24,9 @@ use Phalcon\Security\JWT\Signer\Hmac;
 // Define some absolute path constants to aid in locating resources
 define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
-
+require BASE_PATH . '/vendor/autoload.php';
+// print_r(APP_PATH);
+// die;
 $loader = new \Phalcon\Loader();
 
 $loader->registerNamespaces(

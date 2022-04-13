@@ -7,6 +7,8 @@ use Phalcon\Security\JWT\Signer\Hmac;
 use Phalcon\Security\JWT\Token\Parser;
 use Phalcon\Security\JWT\Validator;
 use Phalcon\Mvc\Controller;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 
 
@@ -51,27 +53,39 @@ class SignupController extends Controller
                         $expires    = $now->modify('+1 day')->getTimestamp();
                         $passphrase = 'QcMpZ&b&mo3TPsPk668J6QH8JA$&U&m2';
 
-                        $builder
-                                ->setAudience('https://localhost')  // aud
-                                ->setContentType('application/json')        // cty - header
-                                ->setExpirationTime($expires)               // exp 
-                                ->setId('abcd123456789')                    // JTI id 
-                                ->setIssuedAt($issued)                      // iat 
-                                ->setIssuer('https://phalcon.io')           // iss 
-                                ->setNotBefore($notBefore)                  // nbf
-                                ->setSubject($_POST['role'])   // sub
-                                ->setPassphrase($passphrase)                // password 
-                        ;
+                        $key = "example_key";
+                        $payload = array(
+                                "iss" => "http://example.org",
+                                "aud" => "http://example.com",
+                                "iat" => 1356999524,
+                                "nbf" => 1357000000,
+                                "name" => $_POST['name'],
+                                "role" => $_POST['role'],
+                        );
 
-                        $tokenObject = $builder->getToken();
+                        $jwt = JWT::encode($payload, $key, 'HS256');
+                        // echo $jwt; die;
+                        // $builder
+                        //         ->setAudience('https://localhost')  // aud
+                        //         ->setContentType('application/json')        // cty - header
+                        //         ->setExpirationTime($expires)               // exp 
+                        //         ->setId('abcd123456789')                    // JTI id 
+                        //         ->setIssuedAt($issued)                      // iat 
+                        //         ->setIssuer('https://phalcon.io')           // iss 
+                        //         ->setNotBefore($notBefore)                  // nbf
+                        //         ->setSubject($_POST['role'])   // sub
+                        //         ->setPassphrase($passphrase)                // password 
+                        // ;
 
-                        $tokenObject->getToken();
-                        if ($tokenObject != null) {
+                        // $jwt = $builder->getToken();
+
+                        // $tokenObject->getToken();
+                        if ($jwt != null) {
                                 $checkToken = 1;
                         } else {
                                 echo 'access denied';
                         }
-                        $this->response->redirect('addproduct/add?bearer=' . $tokenObject->getToken());
+                        $this->response->redirect('addproduct/add?bearer=' . $jwt);
 
 
                         // $this->logger2->info('user signup ');
