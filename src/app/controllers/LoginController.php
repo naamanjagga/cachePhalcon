@@ -10,7 +10,7 @@ use Phalcon\Security\JWT\Token\Parser;
 use Phalcon\Security\JWT\Validator;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-
+use App\Components\Locale;
 
 
 
@@ -18,11 +18,14 @@ class LoginController extends Controller
 {
     public function indexAction()
     {
+        $var = new Locale();
+        $this->view->t    = $var->getTranslator();
     
     }
 
     public function loginAction()
     {
+
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 

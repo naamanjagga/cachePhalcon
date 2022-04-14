@@ -13,6 +13,7 @@ use Phalcon\Security\JWT\Validator;
 use Phalcon\Mvc\Dispatcher;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use App\Components\Locale;
 use Products;
 use Orders;
 use Settings;
@@ -107,7 +108,9 @@ class EventHandler extends Controller
                 $controller = $containerspatcher->getControllerName();
                 $action     = $containerspatcher->getActionName();
                 if (true !== $acl->isAllowed($user, $controller, $action)) {
-                    echo 'Access denied';
+                    $t = new Locale();
+                    $f = $t->getTranslator();
+                    echo $f->_('access denied');
                     die();
                 } else {
                 }

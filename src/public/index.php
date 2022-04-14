@@ -1,3 +1,4 @@
+<?php include 'header.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,8 @@
 </head>
 </html>
 <?php
+
+use App\Components\Locale;
 
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Application;
@@ -25,6 +28,7 @@ use Phalcon\Security\JWT\Signer\Hmac;
 define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
 require BASE_PATH . '/vendor/autoload.php';
+
 // print_r(APP_PATH);
 // die;
 $loader = new \Phalcon\Loader();
@@ -64,6 +68,7 @@ $di->set(
     $eventsManager
 );
 
+$di->set('locale', (new Locale())->getTranslator());
 
 $application->setEventsManager($eventsManager);
 

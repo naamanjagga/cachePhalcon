@@ -25,6 +25,7 @@ return new \Phalcon\Config([
         'pluginsDir'     => APP_PATH . '/plugins/',
         'libraryDir'     => APP_PATH . '/library/',
         'handlerDir'     => APP_PATH . '/handler/',
+        'componentsDir'  => APP_PATH . '/components/',
         'cacheDir'       => BASE_PATH . '/cache/',
         'baseUri'        => '/',
     ]

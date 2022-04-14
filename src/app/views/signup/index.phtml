@@ -1,38 +1,55 @@
-<h2>Sign up using this form</h2>
-<?php echo $this->tag->linkTo(["login/index", "login here", "class" => "btn btn-lg bg-dark text-muted mx-2"]);
+<?php
+if (isset($_GET['locale'])) {
+    $lan = $_GET['locale'];
+    $this->session->set("locale", $lan);
+}
+
+?>
+<div class="mt-3">
+    <form id="myform" method="GET" action="">
+        <select name='locale' id="change" value="" style='position: relative' onchange="this.form.submit()">
+            <option value="<?php echo $this->session->get("locale"); ?>"><?php echo $this->session->get("locale"); ?></option>
+            <option value="Hindi">Hindi</option>
+            <option value="English">English</option>
+            <option value="Japanese">Japanese</option>
+            <option value="French">French</option>
+            <option value="Dutch">Dutch</option>
+        </select>
+    </form>
+</div>
+<h2><?php echo  $t->_('sign up') ?></h2>
+<?php echo $this->tag->linkTo(["login/index",  $t->_("login here"), "class" => "btn btn-lg bg-dark text-muted mx-2"]);
 
 ?>
 <?php echo $this->tag->form("signup/register"); ?>
 
 <p>
-    <label for="name">Name</label>
+    <label for="name"><?php echo  $t->_('Name') ?></label>
     <?php echo $this->tag->textField("name"); ?>
 </p>
 
 <p>
-    <label for="email">E-Mail</label>
+    <label for="email"><?php echo  $t->_('E-Mail') ?></label>
     <?php echo $this->tag->emailField("email"); ?>
 </p>
 
 <p>
-    <label for="psaaword">PASSWORD</label>
+    <label for="psaaword"><?php echo  $t->_('PASSWORD') ?></label>
     <?php echo $this->tag->passwordField("password"); ?>
 </p>
 
 <p>
-    <label for="role">ROLE</label>
+    <label for="role"><?php echo  $t->_('ROLE') ?></label>
     <select name="role" id="role">
-        <option value="admin">admin</option>
-        <option value="manager">manager</option>
-        <option value="user">user</option>
+        <option value="admin"><?php echo  $t->_('admin') ?></option>
+        <option value="manager"><?php echo  $t->_('manager') ?></option>
+        <option value="user"><?php echo  $t->_('user') ?></option>
     </select>
-    <!-- <input type="text" name="role" disabled value="user" > -->
 </p>
 
 <p>
-    <label for="status">STATUS</label>
+    <label for="status"><?php echo  $t->_('STATUS') ?></label>
     <?php echo $this->tag->textField("status"); ?>
-    <!-- <input type="text" name="status" disabled value="restricted" > -->
 </p>
 
 <p>

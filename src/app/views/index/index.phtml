@@ -1,5 +1,25 @@
-<div class="mt-3" >
-<?php echo $this->tag->linkTo(['signup/index', 'sign up', 'class' => 'btn btn-primary']); ?>
-<?php echo $this->tag->linkTo(['login/index', 'log in', 'class' => 'btn btn-primary']); ?>
+<?php
+if (isset($_GET['locale'])) {
+    $lan = $_GET['locale'];
+    $this->session->set("locale", $lan);
+}
+
+?>
+<div class="mt-3">
+    <form id="myform" method="GET" action="">
+        <select name='locale' id="change" value="" style='position: relative' onchange="this.form.submit()">
+            <option value="<?php echo $this->session->get("locale"); ?>"><?php echo $this->session->get("locale"); ?></option>
+            <option value="Hindi">Hindi</option>
+            <option value="English">English</option>
+            <option value="Japanese">Japanese</option>
+            <option value="French">French</option>
+            <option value="Dutch">Dutch</option>
+        </select>
+    </form>
+</div>
+
+<div class="mt-3">
+    <?php echo $this->tag->linkTo(['signup/index?locale=' . $this->session->get("locale"), $t->_('sign up'), 'class' => 'btn btn-primary']); ?>
+    <?php echo $this->tag->linkTo(['login/index?locale=' . $this->session->get("locale"), $t->_('log in'), 'class' => 'btn btn-primary']); ?>
 
 </div>

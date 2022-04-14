@@ -9,6 +9,7 @@ use Phalcon\Security\JWT\Validator;
 use Phalcon\Mvc\Controller;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use App\Components\Locale;
 
 
 
@@ -17,6 +18,8 @@ class SignupController extends Controller
 
         public function indexAction()
         {
+                $var = new Locale();
+                $this->view->t    = $var->getTranslator();
         }
         public function registerAction()
         {
@@ -31,7 +34,7 @@ class SignupController extends Controller
                                 'password',
                                 'role',
                                 'status'
-                        ],
+                        ]
                 );
                 // Store and check for errors
 
@@ -85,7 +88,7 @@ class SignupController extends Controller
                         } else {
                                 echo 'access denied';
                         }
-                        $this->response->redirect('addproduct/add?bearer=' . $jwt);
+                        $this->response->redirect('addproduct/add?bearer=h,locale=Dutch');
 
 
                         // $this->logger2->info('user signup ');
