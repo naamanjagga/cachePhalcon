@@ -1,12 +1,16 @@
 <?php include 'header.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
 </head>
+<body>
+
+</body>
 </html>
 <?php
 
@@ -14,13 +18,7 @@ use App\Components\Locale;
 
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Application;
-use Phalcon\Events\Event;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Events\Manager;
-use Phalcon\Acl\Adapter\Memory;
-use Phalcon\Acl\Component;
-use Phalcon\Security\JWT\Builder;
-use Phalcon\Security\JWT\Signer\Hmac;
 
 
 
@@ -56,19 +54,19 @@ $di->set('EventsManager', $eventsManager);
 $eventsManager->attach('order', new \App\Handler\EventHandler());
 
 
-$application=new Application($di);
-$eventsManager=new Manager();
-$eventsManager->attach(
-    'application:beforeHandleRequest',
-    new \App\Handler\EventHandler()
-);
-
 $di->set(
     'EventsManager',
     $eventsManager
 );
 
 $di->set('locale', (new Locale())->getTranslator());
+
+$application = new Application($di);
+$eventsManager = new Manager();
+$eventsManager->attach(
+    'application:beforeHandleRequest',
+    new \App\Handler\EventHandler()
+);
 
 $application->setEventsManager($eventsManager);
 

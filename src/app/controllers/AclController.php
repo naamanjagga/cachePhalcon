@@ -34,22 +34,11 @@ class AclController extends Controller
             $acl->allow($u->role, $u->controller, $u->action);
 
             }
-            // ... Define roles, components, access, etc
-            // $acl->allow('*','signup', 'index');
-
-           
-
-            
-            // $acl->deny('guest', '*', '*');
-
-
-            // Store serialized list into plain file
             file_put_contents(
                 $aclFile,
                 serialize($acl)
             );
         } else {
-            // Restore ACL object from serialized file
             $acl = unserialize(
                 file_get_contents($aclFile)
             );

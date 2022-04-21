@@ -10,10 +10,13 @@ use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Session\Adapter\Stream as SessionAdapter;
 use Phalcon\Session\Manager as SessionManager;
 use Phalcon\Url as UrlResolver;
-use Phalcon\Di;
-use Phalcon\Events\Event;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Events\Manager;
+use Phalcon\Cache;
+use Phalcon\Cache\AdapterFactory;
+use Phalcon\Storage\SerializerFactory;
+use Phalcon\Cache\CacheFactory;
+use Phalcon\Cache\Adapter\Stream;
+
 
 /**
  * Shared configuration service
@@ -131,4 +134,20 @@ $di->setShared('session', function () {
     $session->start();
 
     return $session;
+});
+
+$di->set('cache', function () {
+
+    $serializerFactory = new SerializerFactory();
+
+    $options = [
+        'defaultSerializer' => 'Json',
+        'lifetime'          => 7200,
+        'storageDir'        => APP_PATH.'/security/',
+    ];
+    
+    $adapter = new Stream($serializerFactory, $options);
+
+    $cache = new Cache($adapter);
+    return $cache;
 });

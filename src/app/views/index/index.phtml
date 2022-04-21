@@ -1,14 +1,10 @@
 <?php
-if (isset($_GET['locale'])) {
-    $lan = $_GET['locale'];
-    $this->session->set("locale", $lan);
-}
+
 
 ?>
 <div class="mt-3">
-    <form id="myform" method="GET" action="">
+    <form id="myform" method="POST" action="">
         <select name='locale' id="change" value="" style='position: relative' onchange="this.form.submit()">
-            <option value="<?php echo $this->session->get("locale"); ?>"><?php echo $this->session->get("locale"); ?></option>
             <option value="Hindi">Hindi</option>
             <option value="English">English</option>
             <option value="Japanese">Japanese</option>
